@@ -1,12 +1,24 @@
 const removeFromArray = function(array, num) {
     const newArray = [];
-    const length = array.length;
-    for (let i = 0; i < length; i++){
-        if (array[i] == num) {
-            continue;
+    const arrayLength = array.length;
+    const argumentsLength = arguments.length;
+    let deleteState;
+    for (let currentArrayElement = 0; currentArrayElement < arrayLength; currentArrayElement++){
+        for (let currentDeleteArgument = 1; currentDeleteArgument <= argumentsLength; currentDeleteArgument++){
+            let deleteArgument = arguments[currentDeleteArgument];
+            if (array[currentArrayElement] === deleteArgument) {
+                deleteState = true;
+                break;
+            }
+            else if (array[currentArrayElement] !== deleteArgument) {
+                deleteState = false;
+            }
         }
-        else if (array[i] !== num) {
-            newArray.push(array[i]);
+        if (deleteState == true) {
+            continue
+        }
+        else if (deleteState == false){
+            newArray.push(array[currentArrayElement]);
         }
     }
     return newArray
